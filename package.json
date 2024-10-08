@@ -1,0 +1,16 @@
+{
+  "name": "roll-hit-dice",
+  "version": "1.0.0",
+  "description": "Takes a D&D Hit Dice expression such as 2d8+6 and returns minimum, weak, average, strong and maximum Hit Point results",
+  "author": "Christopher Miles <mail@christophermiles.com.au> (http://christophermiles.com.au)",
+  "license": "MIT",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "dungeons-and-dragons",
+    "hit-points",
+    "hit-dice"
+  ]
+}
