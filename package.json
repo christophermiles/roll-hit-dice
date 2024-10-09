@@ -1,6 +1,6 @@
 {
   "name": "roll-hit-dice",
-  "version": "2.0.0-alpha.0",
+  "version": "1.0.0-alpha.0",
   "description": "Takes a D&D Hit Dice expression such as 2d8+6 and returns minimum, weak, average, strong and maximum Hit Point results",
   "author": "Christopher Miles <mail@christophermiles.com.au> (http://christophermiles.com.au)",
   "license": "MIT",
