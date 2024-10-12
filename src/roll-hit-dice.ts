@@ -1,28 +1,33 @@
 import type { DiceCount, DieType, HitPointResults, Modifier } from './types'
+import { HIT_DICE_REGEX } from './constants'
+import { calculateMiddle, calculateMinimum, getDieAverage } from './utils'
 
-function arrayFromNumber(number: number): number[] {
-    return Array.from({ length: Math.floor(number) }, (_, i) => i + 1)
+export function parseHitDice(expression: string): {
+    diceCount: DiceCount
+    dieType: DieType
+    modifier: Modifier
+} {
+    const match = expression.match(HIT_DICE_REGEX)
+
+    if (match) {
+        const diceCount: DiceCount = Number.parseInt(match[1], 10)
+        const dieType: DieType = Number.parseInt(match[2], 10)
+        const modifier: Modifier = match[3] ? Number.parseInt(match[3], 10) : 0
+
+        return {
+            diceCount,
+            dieType,
+            modifier,
+        }
+    }
+    else {
+        throw new Error(`🎲 ${expression} is not a valid Hit Dice expression`)
+    }
 }
 
-function roundToNearestHalf(num: number) {
-    return Math.round(num * 2) / 2
-}
+export default function rollHitDice(expression: string): HitPointResults {
+    const { diceCount, dieType, modifier } = parseHitDice(expression)
 
-function getDieAverage(dieType: DieType): number {
-    const array = arrayFromNumber(dieType)
-    return roundToNearestHalf(array.reduce((accumulator, currentValue) => accumulator + currentValue, 0) / array.length)
-}
-
-function calculateMiddle(a: number, b: number): number {
-    return Math.floor((a + b) / 2)
-}
-
-function calculateMinimum(diceCount: DiceCount, modifier: Modifier): number {
-    const minimum = diceCount + modifier
-    return minimum >= 1 ? minimum : 1
-}
-
-export default function rollHitDice(diceCount: DiceCount, dieType: DieType, modifier: Modifier): HitPointResults {
     if (Number.isNaN(diceCount) || Number.isNaN(dieType) || diceCount <= 0 || dieType <= 0) {
         throw new Error('🎲 Die type and number of dice must be positive integers.')
     }
