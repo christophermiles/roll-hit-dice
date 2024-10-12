@@ -1,1 +1,2 @@
-- Add ESLint config
+- [ ] Add ESLint config
+- [ ] Add tests
